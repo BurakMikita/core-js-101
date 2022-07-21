@@ -207,8 +207,25 @@ function getParallelepipedDiagonal(a, b, c) {
  *   1678, 2  => 1700
  *   1678, 3  => 2000
  */
-function roundToPowerOfTen(/* num, pow */) {
-  throw new Error('Not implemented');
+function roundToPowerOfTen(num, pow) {
+  const index = 4 - pow;
+  const str = String(num);
+  const arr = str.split('');
+
+  const number = arr[index];
+  if (number > 5) {
+    arr[index - 1] = Number(arr[index - 1]) + 1;
+
+    for (let i = index; i < arr.length; i += 1) {
+      arr[i] = 0;
+    }
+  } else {
+    for (let i = index; i < arr.length; i += 1) {
+      arr[i] = 0;
+    }
+  }
+  const newArr = arr.join('');
+  return +newArr;
 }
 
 /**
@@ -228,8 +245,13 @@ function roundToPowerOfTen(/* num, pow */) {
  *   16 => false
  *   17 => true
  */
-function isPrime(/* n */) {
-  throw new Error('Not implemented');
+function isPrime(n) {
+  for (let i = 2; i < n; i += 1) {
+    if (n % i === 0) {
+      return false;
+    }
+  }
+  return true;
 }
 
 /**
@@ -247,8 +269,21 @@ function isPrime(/* n */) {
  *   toNumber(42, 0) => 42
  *   toNumber(new Number(42), 0) => 42
  */
-function toNumber(/* value, def */) {
-  throw new Error('Not implemented');
+function toNumber(value, def) {
+  let valueTwo = value;
+  if (typeof value === 'undefined') {
+    valueTwo = 0;
+  }
+  const sum = Number(valueTwo) + Number(def);
+  // eslint-disable-next-line no-restricted-globals
+  const innan = Number.isNaN(sum);
+  if (innan) {
+    return false;
+  }
+  if (typeof sum !== 'number') {
+    return 0;
+  }
+  return sum;
 }
 
 module.exports = {
