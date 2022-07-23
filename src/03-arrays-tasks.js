@@ -262,8 +262,14 @@ function toArrayOfSquares(arr) {
  *   [ 0, 0, 0, 0, 0]         => [ 0, 0, 0, 0, 0]
  *   [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ] => [ 1, 3, 6, 10, 15, 21, 28, 36, 45, 55 ]
  */
-function getMovingSum(/* arr */) {
-  throw new Error('Not implemented');
+function getMovingSum(arr) {
+  let prevNumber = 0;
+
+  const newArr = arr.map((value) => {
+    prevNumber += value;
+    return prevNumber;
+  });
+  return newArr;
 }
 
 /**
@@ -581,10 +587,19 @@ function distinct(arr) {
  *    "Poland" => ["Lodz"]
  *   }
  */
-function group(/* array, keySelector, valueSelector */) {
-  throw new Error('Not implemented');
+function group(array, keySelector, valueSelector) {
+  const map = new Map();
+  let value = '';
+  array.map((el) => {
+    const key = keySelector(el);
+    value = valueSelector(el);
+    const arr = map.get(key) || [];
+    arr.push(value);
+    map.set(key, arr);
+    return key;
+  });
+  return map;
 }
-
 
 /**
  * Projects each element of the specified array to a sequence
